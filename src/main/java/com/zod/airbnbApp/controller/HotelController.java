@@ -30,4 +30,25 @@ public class HotelController {
         return new ResponseEntity<>(hotel , HttpStatus.OK);
     }
 
+    @PutMapping("/{hotelId}")
+    public ResponseEntity<HotelDto> updateHotel(@PathVariable Long hotelId, @RequestBody HotelDto hotelDto) {
+        log.info("Attempting to update hotel with id: {}", hotelId);
+        HotelDto hotel = hotelService.updateHotel(hotelId, hotelDto);
+        return new ResponseEntity<>(hotel, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{hotelId}")
+    public ResponseEntity<Void> deleteHotel(@PathVariable Long hotelId) {
+        log.info("Attempting to delete hotel with id: {}", hotelId);
+        hotelService.deleteHotel(hotelId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{hotelId}")
+    public ResponseEntity<Void> activateHotel(@PathVariable Long hotelId) {
+        log.info("Attempting to activate hotel with id: {}", hotelId);
+        hotelService.activateHotel(hotelId);
+        return ResponseEntity.ok().build();
+    }
+
 }
